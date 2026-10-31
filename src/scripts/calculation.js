@@ -44,6 +44,26 @@ export default class Calculation {
     getResult() {
         if (!this.operands[0] || !this.operands[this.operands.length - 1]) return '';
 
+        if (!this.operators.includes('/')) {
+            let result = BigInt(this.operands[0]);
+            for (let i = 0; i < this.operators.length; i++) {
+                const operand = BigInt(this.operands[i + 1]);
+                switch (this.operators[i]) {
+                    case '+':
+                        result += operand;
+                        break;
+                    case '-':
+                        result -= operand;
+                        break;
+                    case '*':
+                        result *= operand;
+                        break;
+                }
+            }
+
+            return result.toString();
+        }
+
         let result = Number(this.operands[0]);
         for (let i = 0; i < this.operators.length; i++) {
             const operand = Number(this.operands[i + 1]);
