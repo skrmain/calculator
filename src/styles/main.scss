@@ -41,10 +41,14 @@ body {
     .calculation {
         font-size: 3vh;
         height: 2em;
+        overflow-x: auto;
+        white-space: nowrap;
     }
     .result {
         font-size: 5.5vh;
         font-weight: bold;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 }
 

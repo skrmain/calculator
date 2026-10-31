@@ -1,11 +1,11 @@
+import Calculation from './calculation.js';
+
 let btn = document.querySelectorAll('button');
 let cal = document.querySelector('.calculation');
 let res = document.querySelector('.result');
 let alertDialog = document.querySelector('.alertDialog');
 
-let calculation = ''
-let operator = ''
-let operatorStatus = true
+let calculation = new Calculation();
 
 for (let i = 0; i < btn.length; i++) {
     btn[i].addEventListener('click', (e) => {
@@ -26,8 +26,7 @@ function putVal(a) {
         case '8':
         case '9':
         case '0':
-            calculation += a;
-            operatorStatus = false;
+            calculation.addDigit(a);
             doOperation();
             updateHtml();
             break;
@@ -35,76 +34,34 @@ function putVal(a) {
         case '*':
         case '/':
         case '-':
-            if (operatorStatus === false) {
-                calculation += ',';
-                operator += a;
-                res.innerHTML = ''
+            if (calculation.addOperator(a)) {
+                res.textContent = '';
                 updateHtml();
-                operatorStatus = true;
             } else {
                 alertDialog.showModal();
             }
             break;
         case 'Backspace':
-            if (calculation[calculation.length - 1] === ',') {
-                operator = operator.trim().slice(0, (operator.length - 1))
-            }
-            calculation = calculation.trim().slice(0, (calculation.length - 1))
-            if (calculation[calculation.length - 1] === ',') {
-                operatorStatus = true;
-            } else {
-                operatorStatus = false;
-            }
+            calculation.backspace();
             doOperation();
             updateHtml();
             break;
         case 'clearAll':
-            calculation = ''
-            operator = ''
+            calculation.clear();
             doOperation();
             updateHtml();
-            operatorStatus = true;
             break;
     }
 }
 
 function updateHtml() {
-    let calculationList = calculation.split(',')
-    let operatorList = operator.split('')
-    let text = ''
-    for (let i = 0; i < calculationList.length; i++) {
-        text += ' ' + calculationList[i] + ' ' + (operatorList[i] || '')
-    }
-    cal.innerHTML = text;
+    cal.textContent = calculation.getExpression();
+    cal.scrollLeft = cal.scrollWidth;
 }
 
 function doOperation() {
-    let calculationList = calculation.split(',')
-    let operatorList = operator.split('')
-    let result = parseInt(calculationList[0]) || ''
-    for (let i = 0; i < calculationList.length - 1; i++) {
-        let o = operatorList[i]
-        switch (o) {
-            case '+':
-                result += parseInt(calculationList[i + 1]) || 0;
-                break;
-            case '-':
-                result -= parseInt(calculationList[i + 1]) || 0;
-                break;
-            case '*':
-                result *= parseInt(calculationList[i + 1]);
-                break;
-            case '/':
-                result /= parseInt(calculationList[i + 1]);
-        }
-        res.innerHTML = result;
-    }
-    if (calculationList[calculationList.length - 1] === '') {
-        res.innerHTML = ''
-    }
-    if (calculationList.length <= 1) {
-        res.innerHTML = result;
-    }
+    res.textContent = calculation.getResult();
+    res.scrollLeft = res.scrollWidth;
 }
 
 function removeTransition(e) {
