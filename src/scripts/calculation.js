@@ -56,11 +56,34 @@ export default class Calculation {
     }
 
     calculateCurrentResult() {
+        if (this.operators.includes('/')) {
+            let result = Number(this.operands[0]);
+            for (let i = 0; i < this.operators.length; i++) {
+                const operand = Number(this.operands[i + 1]);
+                switch (this.operators[i]) {
+                    case '+':
+                        result += operand;
+                        break;
+                    case '-':
+                        result -= operand;
+                        break;
+                    case '*':
+                        result *= operand;
+                        break;
+                    case '/':
+                        result /= operand;
+                        break;
+                }
+            }
+
+            return result;
+        }
+
         const lastOperator = this.operators.length - 1;
-        if (lastOperator < 0) return Number(this.operands[0]);
+        if (lastOperator < 0) return BigInt(this.operands[0]);
 
         const result = this.partialResults[lastOperator];
-        const operand = Number(this.operands[lastOperator + 1]);
+        const operand = BigInt(this.operands[lastOperator + 1]);
         switch (this.operators[lastOperator]) {
             case '+':
                 return result + operand;
