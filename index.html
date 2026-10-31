@@ -52,6 +52,14 @@
             <button aria-label="Divide" class="operationButton" data-value="/">/</button>
         </section>
 
+        <dialog class="alertDialog" aria-labelledby="invalidOperationTitle" aria-describedby="invalidOperationMessage">
+            <h2 id="invalidOperationTitle">Invalid Operation</h2>
+            <p id="invalidOperationMessage">Enter a number before choosing an operator.</p>
+            <form method="dialog">
+                <button autofocus>OK</button>
+            </form>
+        </dialog>
+
         <script type="module" src="./src/scripts/install.js"></script>
         <script type="module" src="./src/scripts/main.js"></script>
     </body>
