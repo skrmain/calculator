@@ -64,16 +64,17 @@ function doOperation() {
     res.scrollLeft = res.scrollWidth;
 }
 
-function removeTransition(e) {
-    if (e.propertyName !== 'box-shadow') return;
-    e.target.classList.remove('btnStyle');
-}
-
 const keys = Array.from(document.querySelectorAll('button'));
-keys.forEach((key) => key.addEventListener('transitionend', removeTransition));
 window.addEventListener('keydown', (e) => {
     let value = document.querySelector(`button[data-value="${e.key}"]`);
     if (!value) return;
     value.classList.add('btnStyle');
     putVal(e.key);
+});
+window.addEventListener('keyup', (e) => {
+    let value = document.querySelector(`button[data-value="${e.key}"]`);
+    value?.classList.remove('btnStyle');
+});
+window.addEventListener('blur', () => {
+    keys.forEach((key) => key.classList.remove('btnStyle'));
 });
