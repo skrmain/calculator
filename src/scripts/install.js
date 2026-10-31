@@ -4,7 +4,7 @@ const btnAdd = document.querySelector('.checkBtn');
 const registerServiceWorker = async () => {
     if ('serviceWorker' in navigator) {
         try {
-            const reg = await navigator.serviceWorker.register('../sw.js');
+            const reg = await navigator.serviceWorker.register('./sw.js');
 
             console.log('[Install] SW reg. successful, Scope: ', reg.scope);
         } catch (error) {

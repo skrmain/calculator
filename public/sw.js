@@ -1,14 +1,13 @@
-const cacheName = 'v1';
+const cacheName = 'v2';
 const contentToCache = [
     './index.html',
-    './styles/main.css',
+    './manifest.json',
     './images/clear.png',
     './images/github.png',
     './images/icon-144.png',
     './images/icon-192.png',
     './images/icon-512.png',
-    './scripts/main.js',
-    './scripts/install.js',
+    './images/plusMinus.png',
 ];
 
 self.addEventListener('install', (e) => {
@@ -61,7 +60,7 @@ self.addEventListener('fetch', (e) => {
 
 self.addEventListener('activate', (event) => {
     console.log('[sw] Activate');
-    const cacheWhitelist = [];
+    const cacheWhitelist = [cacheName];
 
     event.waitUntil(
         (async () => {

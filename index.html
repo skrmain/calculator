@@ -1,15 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <meta name="description" content="Calculator WebApp | Installable | Mobile Responsive | Support Keyboard typing | PWA" />
+        <meta
+            name="description"
+            content="Calculator WebApp | Installable | Mobile Responsive | Support Keyboard typing | PWA"
+        />
         <title>Calculator</title>
         <meta name="theme-color" content="#e4e4e4" />
         <link rel="icon" sizes="192x192" href="./images/icon-192.png" />
         <link rel="apple-touch-icon" href="./images/icon-192.png" />
-        <link rel="stylesheet" href="./styles/main.css" />
+        <link rel="stylesheet" href="./src/styles/main.scss" />
 
         <link rel="manifest" href="./manifest.json" />
     </head>
@@ -21,7 +24,7 @@
                 <button class="checkBtn">Add to Home Screen</button>
                 <span>
                     <a href="https://github.com/skrmain/calculator" target="_blank">
-                        <img class="github" src="images/github.png" alt="github">
+                        <img class="github" src="images/github.png" alt="github" />
                     </a>
                 </span>
             </div>
@@ -32,7 +35,7 @@
         </section>
         <section class="buttonContainer">
             <button aria-label="Clear All" data-value="clearAll" class="item1">CE</button>
-            <button aria-label="Clear One" class="plusMinus clear" data-value="Backspace" style="background-image: url(images/clear.png)"></button>
+            <button aria-label="Clear One" class="plusMinus clear" data-value="Backspace"></button>
             <button aria-label="Seven" class="numButton" data-value="7">7</button>
             <button aria-label="Eight" class="numButton" data-value="8">8</button>
             <button aria-label="Nine" class="numButton" data-value="9">9</button>
@@ -49,23 +52,7 @@
             <button aria-label="Divide" class="operationButton" data-value="/">/</button>
         </section>
 
-        <script src="./scripts/install.js"></script>
-
-        <script src="scripts/main.js"></script>
-        <script>
-            function removeTransition(e) {
-                if (e.propertyName !== 'box-shadow') return;
-                e.target.classList.remove('btnStyle');
-            }
-
-            const keys = Array.from(document.querySelectorAll('button'));
-            keys.forEach((key) => key.addEventListener('transitionend', removeTransition));
-            window.addEventListener('keydown', (e) => {
-                let value = document.querySelector(`button[data-value="${e.key}"]`);
-                if (!value) return;
-                value.classList.add('btnStyle');
-                putVal(e.key);
-            });
-        </script>
+        <script type="module" src="./src/scripts/install.js"></script>
+        <script type="module" src="./src/scripts/main.js"></script>
     </body>
 </html>

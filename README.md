@@ -3,8 +3,15 @@
 ## Notes
 
 ```sh
-npm i
-npm start
+npm install
+npm run dev
+```
+
+Create and preview a production build:
+
+```sh
+npm run build
+npm run preview
 ```
 
 ## Features
@@ -17,5 +24,5 @@ npm start
 
 ## Reference
 
-- https://gulpjs.com/
+- https://vite.dev/
 - https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps
