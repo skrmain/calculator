@@ -1,6 +1,7 @@
 let btn = document.querySelectorAll('button');
 let cal = document.querySelector('.calculation');
 let res = document.querySelector('.result');
+let alertDialog = document.querySelector('.alertDialog');
 
 let calculation = ''
 let operator = ''
@@ -41,7 +42,7 @@ function putVal(a) {
                 updateHtml();
                 operatorStatus = true;
             } else {
-                alert('Invalid Operation')
+                alertDialog.showModal();
             }
             break;
         case 'Backspace':
