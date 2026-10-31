@@ -2,6 +2,7 @@ export default class Calculation {
     constructor() {
         this.operands = [''];
         this.operators = [];
+        this.partialResults = [];
     }
 
     addDigit(digit) {
@@ -13,6 +14,7 @@ export default class Calculation {
         const lastOperand = this.operands.length - 1;
         if (!this.operands[lastOperand]) return false;
 
+        this.partialResults.push(this.calculateCurrentResult());
         this.operators.push(operator);
         this.operands.push('');
         return true;
@@ -25,12 +27,14 @@ export default class Calculation {
         } else if (this.operators.length) {
             this.operators.pop();
             this.operands.pop();
+            this.partialResults.pop();
         }
     }
 
     clear() {
         this.operands = [''];
         this.operators = [];
+        this.partialResults = [];
     }
 
     getExpression() {
@@ -44,27 +48,28 @@ export default class Calculation {
     getResult() {
         if (!this.operands[0] || !this.operands[this.operands.length - 1]) return '';
 
-        let result = Number(this.operands[0]);
-        for (let i = 0; i < this.operators.length; i++) {
-            const operand = Number(this.operands[i + 1]);
-            switch (this.operators[i]) {
-                case '+':
-                    result += operand;
-                    break;
-                case '-':
-                    result -= operand;
-                    break;
-                case '*':
-                    result *= operand;
-                    break;
-                case '/':
-                    result /= operand;
-                    break;
-            }
-        }
+        const result = this.calculateCurrentResult();
 
         return Number.isFinite(result)
             ? result.toLocaleString('en-US', { useGrouping: false, maximumSignificantDigits: 21 })
             : String(result);
+    }
+
+    calculateCurrentResult() {
+        const lastOperator = this.operators.length - 1;
+        if (lastOperator < 0) return Number(this.operands[0]);
+
+        const result = this.partialResults[lastOperator];
+        const operand = Number(this.operands[lastOperator + 1]);
+        switch (this.operators[lastOperator]) {
+            case '+':
+                return result + operand;
+            case '-':
+                return result - operand;
+            case '*':
+                return result * operand;
+            case '/':
+                return result / operand;
+        }
     }
 }
