@@ -58,7 +58,7 @@ export default class Calculation {
         const result = this.calculateCurrentResult();
 
         return Number.isFinite(result)
-            ? result.toLocaleString('en-US', { useGrouping: false, maximumSignificantDigits: 21 })
+            ? result.toLocaleString('en-US', { useGrouping: false, maximumFractionDigits: 10 })
             : String(result);
     }
 
