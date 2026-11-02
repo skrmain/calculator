@@ -7,6 +7,8 @@ function calculate(expression) {
     for (const character of expression) {
         if ('0123456789'.includes(character)) {
             calculation.addDigit(character);
+        } else if (character === '.') {
+            calculation.addDecimalPoint();
         } else {
             calculation.addOperator(character);
         }
@@ -27,4 +29,10 @@ test('calculates large integer addition, subtraction, and multiplication exactly
 test('retains ordinary integer and division behavior', () => {
     assert.equal(calculate('12+3*4'), '60');
     assert.equal(Number(calculate('1/3')), 1 / 3);
+});
+
+test('calculates decimal expressions and ignores duplicate decimal points', () => {
+    assert.equal(calculate('1.5+2.25'), '3.75');
+    assert.equal(calculate('.5*2'), '1');
+    assert.equal(calculate('1.2.3+1'), '2.23');
 });

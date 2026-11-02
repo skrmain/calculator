@@ -30,6 +30,11 @@ function putVal(a) {
             doOperation();
             updateHtml();
             break;
+        case '.':
+            calculation.addDecimalPoint();
+            doOperation();
+            updateHtml();
+            break;
         case '+':
         case '*':
         case '/':

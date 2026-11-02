@@ -10,6 +10,13 @@ export default class Calculation {
         this.operands[lastOperand] += digit;
     }
 
+    addDecimalPoint() {
+        const lastOperand = this.operands.length - 1;
+        if (this.operands[lastOperand].includes('.')) return;
+
+        this.operands[lastOperand] += this.operands[lastOperand] ? '.' : '0.';
+    }
+
     addOperator(operator) {
         const lastOperand = this.operands.length - 1;
         if (!this.operands[lastOperand]) return false;
@@ -56,7 +63,7 @@ export default class Calculation {
     }
 
     calculateCurrentResult() {
-        if (this.operators.includes('/')) {
+        if (this.operators.includes('/') || this.operands.some((operand) => operand.includes('.'))) {
             let result = Number(this.operands[0]);
             for (let i = 0; i < this.operators.length; i++) {
                 const operand = Number(this.operands[i + 1]);
