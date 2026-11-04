@@ -51,7 +51,9 @@ export default class Calculation {
     getExpression() {
         return this.operands
             .map((operand, index) => (
-                index < this.operators.length ? `${operand} ${this.operators[index]}` : operand
+                index < this.operators.length
+                    ? `${this.formatOperand(operand)} ${this.operators[index]}`
+                    : this.formatOperand(operand)
             ))
             .join(' ');
     }
@@ -61,9 +63,22 @@ export default class Calculation {
 
         const result = this.calculateCurrentResult();
 
+        if (typeof result === 'bigint') return result.toLocaleString('en-IN');
+
         return Number.isFinite(result)
-            ? result.toLocaleString('en-US', { useGrouping: false, maximumFractionDigits: 10 })
+            ? result.toLocaleString('en-IN', { useGrouping: true, maximumFractionDigits: 10 })
             : String(result);
+    }
+
+    formatOperand(operand) {
+        const decimalPoint = operand.indexOf('.');
+        const integer = decimalPoint === -1 ? operand : operand.slice(0, decimalPoint);
+        const fraction = decimalPoint === -1 ? '' : operand.slice(decimalPoint);
+
+        if (integer.length <= 3) return operand;
+
+        const prefix = integer.slice(0, -3).replace(/\B(?=(\d{2})+$)/g, ',');
+        return `${prefix},${integer.slice(-3)}${fraction}`;
     }
 
     calculateCurrentResult() {

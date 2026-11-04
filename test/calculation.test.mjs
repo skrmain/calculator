@@ -16,14 +16,31 @@ function calculate(expression) {
     return calculation.getResult();
 }
 
-test('preserves a large entered integer exactly', () => {
-    assert.equal(calculate('9999999999999999999999'), '9999999999999999999999');
+test('formats a large entered integer exactly', () => {
+    assert.equal(calculate('9999999999999999999999'), '9,99,99,99,99,99,99,99,99,99,999');
+});
+
+test('formats results using the Indian numbering system', () => {
+    assert.equal(calculate('100000'), '1,00,000');
+    assert.equal(calculate('12345678'), '1,23,45,678');
+    assert.equal(calculate('0-100000'), '-1,00,000');
+});
+
+test('formats entered operands using the Indian numbering system', () => {
+    const calculation = new Calculation();
+    for (const character of '100000+12345678.90') {
+        if ('0123456789'.includes(character)) calculation.addDigit(character);
+        else if (character === '.') calculation.addDecimalPoint();
+        else calculation.addOperator(character);
+    }
+
+    assert.equal(calculation.getExpression(), '1,00,000 + 1,23,45,678.90');
 });
 
 test('calculates large integer addition, subtraction, and multiplication exactly', () => {
-    assert.equal(calculate('9999999999999999999999+1'), '10000000000000000000000');
-    assert.equal(calculate('10000000000000000000000-1'), '9999999999999999999999');
-    assert.equal(calculate('9999999999999999999999*2'), '19999999999999999999998');
+    assert.equal(calculate('9999999999999999999999+1'), '10,00,00,00,00,00,00,00,00,00,000');
+    assert.equal(calculate('10000000000000000000000-1'), '9,99,99,99,99,99,99,99,99,99,999');
+    assert.equal(calculate('9999999999999999999999*2'), '19,99,99,99,99,99,99,99,99,99,998');
 });
 
 test('retains ordinary integer and division behavior', () => {
