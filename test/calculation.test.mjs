@@ -33,7 +33,19 @@ test('retains ordinary integer and division behavior', () => {
 
 test('calculates decimal expressions and ignores duplicate decimal points', () => {
     assert.equal(calculate('1.5+2.25'), '3.75');
-    assert.equal(calculate('1.23456789016+0'), '1.2345678902');
+    assert.equal(calculate('1.23456789016+0'), '1.2345678901');
     assert.equal(calculate('.5*2'), '1');
     assert.equal(calculate('1.2.3+1'), '2.23');
+});
+
+test('limits entered operands to ten decimal places', () => {
+    const calculation = new Calculation();
+    for (const digit of '1.1234567890') {
+        if (digit === '.') calculation.addDecimalPoint();
+        else calculation.addDigit(digit);
+    }
+
+    assert.equal(calculation.addDigit('1'), false);
+    assert.equal(calculation.getExpression(), '1.1234567890');
+    assert.equal(calculation.getResult(), '1.123456789');
 });

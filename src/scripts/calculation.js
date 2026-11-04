@@ -7,7 +7,11 @@ export default class Calculation {
 
     addDigit(digit) {
         const lastOperand = this.operands.length - 1;
+        const decimalPoint = this.operands[lastOperand].indexOf('.');
+        if (decimalPoint !== -1 && this.operands[lastOperand].length - decimalPoint - 1 >= 10) return false;
+
         this.operands[lastOperand] += digit;
+        return true;
     }
 
     addDecimalPoint() {
