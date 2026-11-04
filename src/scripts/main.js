@@ -4,6 +4,7 @@ let btn = document.querySelectorAll('button');
 let cal = document.querySelector('.calculation');
 let res = document.querySelector('.result');
 let alertDialog = document.querySelector('.alertDialog');
+let alertMessage = document.querySelector('#invalidOperationMessage');
 
 let calculation = new Calculation();
 
@@ -26,9 +27,12 @@ function putVal(a) {
         case '8':
         case '9':
         case '0':
-            calculation.addDigit(a);
-            doOperation();
-            updateHtml();
+            if (calculation.addDigit(a)) {
+                doOperation();
+                updateHtml();
+            } else {
+                showAlert("Can't add more than 10 decimal places.");
+            }
             break;
         case '.':
             calculation.addDecimalPoint();
@@ -43,7 +47,7 @@ function putVal(a) {
                 res.textContent = '';
                 updateHtml();
             } else {
-                alertDialog.showModal();
+                showAlert('Enter a number before choosing an operator.');
             }
             break;
         case 'Backspace':
@@ -57,6 +61,11 @@ function putVal(a) {
             updateHtml();
             break;
     }
+}
+
+function showAlert(message) {
+    alertMessage.textContent = message;
+    alertDialog.showModal();
 }
 
 function updateHtml() {
