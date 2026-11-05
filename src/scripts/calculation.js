@@ -70,6 +70,28 @@ export default class Calculation {
             : String(result);
     }
 
+    evaluate() {
+        if (!this.operators.length || !this.operands[this.operands.length - 1]) return null;
+
+        const expression = this.getExpression();
+        let result;
+        try {
+            result = this.calculateCurrentResult();
+        } catch {
+            return null;
+        }
+        if (typeof result !== 'bigint' && !Number.isFinite(result)) return null;
+
+        const entry = { expression, result: this.getResult() };
+        const raw = typeof result === 'bigint'
+            ? result.toString()
+            : result.toLocaleString('en-US', { useGrouping: false, maximumFractionDigits: 10 });
+        this.operands = [raw];
+        this.operators = [];
+        this.partialResults = [];
+        return entry;
+    }
+
     formatOperand(operand) {
         const decimalPoint = operand.indexOf('.');
         const integer = decimalPoint === -1 ? operand : operand.slice(0, decimalPoint);
