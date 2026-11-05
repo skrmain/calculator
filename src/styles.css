@@ -1,217 +1,217 @@
 body {
-  background-color: #e4e4e4;
-  height: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  max-width: 50em;
+    background-color: #e4e4e4;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 50em;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .titleContainer {
-  background-color: #e4e4e4;
-  height: 7vh;
+    background-color: #e4e4e4;
+    height: 7vh;
 }
 .titleContainer div {
-  margin-top: 2vh;
-  padding: 0 2vh;
-  display: flex;
-  justify-content: space-between;
+    margin-top: 2vh;
+    padding: 0 2vh;
+    display: flex;
+    justify-content: space-between;
 }
 .titleContainer div .historyBtn {
-  padding: 0.5em;
-  border: none;
-  border-radius: 5px;
-  background-color: #fff;
-  font-family: sans-serif;
-  cursor: pointer;
+    padding: 0.5em;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    font-family: sans-serif;
+    cursor: pointer;
 }
 .titleContainer div span .github {
-  width: 2rem;
+    width: 2rem;
 }
 
 .calculationContainer {
-  height: 20vh;
-  background-color: #e4e4e4;
-  text-align: right;
-  font-family: sans-serif;
-  padding-right: 3vh;
-  width: 100%;
-  min-width: 0;
+    height: 20vh;
+    background-color: #e4e4e4;
+    text-align: right;
+    font-family: sans-serif;
+    padding-right: 3vh;
+    width: 100%;
+    min-width: 0;
 }
 .calculationContainer .calculation {
-  font-size: 3vh;
-  height: 2em;
-  overflow-x: auto;
-  white-space: nowrap;
-  min-width: 0;
+    font-size: 3vh;
+    height: 2em;
+    overflow-x: auto;
+    white-space: nowrap;
+    min-width: 0;
 }
 .calculationContainer .result {
-  font-size: 5.5vh;
-  font-weight: bold;
-  overflow-x: auto;
-  white-space: nowrap;
-  min-width: 0;
+    font-size: 5.5vh;
+    font-weight: bold;
+    overflow-x: auto;
+    white-space: nowrap;
+    min-width: 0;
 }
 
 .historyContainer {
-  height: 3em;
+    height: 3em;
 }
 
 .buttonContainer {
-  display: grid;
-  height: 72.8vh;
-  grid-template-columns: 25% 25% 25% 25%;
+    display: grid;
+    height: 72.8vh;
+    grid-template-columns: 25% 25% 25% 25%;
 }
 .buttonContainer .item1 {
-  grid-column-start: 1;
-  grid-column-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 .buttonContainer .clear {
-  grid-column-start: 3;
-  grid-column-end: 5;
+    grid-column-start: 3;
+    grid-column-end: 5;
 }
 .buttonContainer button {
-  padding: 2vh;
-  font-size: 4vh;
-  margin: 0.2vh;
-  background-color: #EEEEEE;
-  border: none;
-  transition: 0.1s ease-in;
-  border-radius: 0.4rem;
+    padding: 2vh;
+    font-size: 4vh;
+    margin: 0.2vh;
+    background-color: #eeeeee;
+    border: none;
+    transition: 0.1s ease-in;
+    border-radius: 0.4rem;
 }
 .buttonContainer button:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 .buttonContainer button:active {
-  box-shadow: 0 0 3px #4d4d4d;
-  background-color: #ebebeb;
-  transform: scale(0.98);
+    box-shadow: 0 0 3px #4d4d4d;
+    background-color: #ebebeb;
+    transform: scale(0.98);
 }
 .buttonContainer button:focus {
-  outline: 0;
+    outline: 0;
 }
 .buttonContainer button img {
-  max-width: 100%;
-  position: relative;
+    max-width: 100%;
+    position: relative;
 }
 .buttonContainer .plusMinus {
-  background-image: url("/images/clear.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 1.5em;
+    background-image: url('/images/clear.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1.5em;
 }
 .buttonContainer .numButton {
-  font-weight: bold;
-  background-color: #fafafa;
+    font-weight: bold;
+    background-color: #fafafa;
 }
 .buttonContainer .operationButton:active {
-  background-color: #3b5fff;
-  color: white;
-  background-color: #839aff;
+    background-color: #3b5fff;
+    color: white;
+    background-color: #839aff;
 }
 
 .btnStyle {
-  border-color: #4d4d4d;
-  box-shadow: 0 0 3px #4d4d4d;
+    border-color: #4d4d4d;
+    box-shadow: 0 0 3px #4d4d4d;
 }
 
 .checkBtn {
-  display: none;
-  position: absolute;
-  right: 4vh;
-  cursor: pointer;
-  padding: 0.5em;
-  background-color: #e4e4e4;
-  border-radius: 5px;
-  border: none;
-  box-shadow: 0 0 2px black;
+    display: none;
+    position: absolute;
+    right: 4vh;
+    cursor: pointer;
+    padding: 0.5em;
+    background-color: #e4e4e4;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 2px black;
 }
 .checkBtn:hover {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .alertDialog {
-  width: min(90vw, 24rem);
-  padding: 1.5rem;
-  border: none;
-  border-radius: 0.75rem;
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2666666667);
-  font-family: sans-serif;
+    width: min(90vw, 24rem);
+    padding: 1.5rem;
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2666666667);
+    font-family: sans-serif;
 }
 .alertDialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 .alertDialog h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1.25rem;
+    margin: 0 0 0.75rem;
+    font-size: 1.25rem;
 }
 .alertDialog p {
-  margin: 0 0 1.5rem;
+    margin: 0 0 1.5rem;
 }
 .alertDialog form {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 .alertDialog button {
-  padding: 0.6rem 1.25rem;
-  border: none;
-  border-radius: 0.4rem;
-  background-color: #3b5fff;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
+    padding: 0.6rem 1.25rem;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: #3b5fff;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .historyDialog {
-  width: min(90vw, 28rem);
-  padding: 1.5rem;
-  border: none;
-  border-radius: 0.75rem;
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2666666667);
-  font-family: sans-serif;
+    width: min(90vw, 28rem);
+    padding: 1.5rem;
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2666666667);
+    font-family: sans-serif;
 }
 .historyDialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 .historyDialog h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1.25rem;
+    margin: 0 0 0.75rem;
+    font-size: 1.25rem;
 }
 .historyDialog .historyList {
-  list-style: none;
-  margin: 0 0 1rem;
-  padding: 0;
-  max-height: 50vh;
-  overflow-y: auto;
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    max-height: 50vh;
+    overflow-y: auto;
 }
 .historyDialog .historyList li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #ddd;
-  overflow-wrap: anywhere;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+    overflow-wrap: anywhere;
 }
 .historyDialog .historyEmpty {
-  margin: 0 0 1rem;
+    margin: 0 0 1rem;
 }
 .historyDialog .historyList:not(:empty) + .historyEmpty {
-  display: none;
+    display: none;
 }
 .historyDialog button {
-  padding: 0.4rem 0.9rem;
-  border: none;
-  border-radius: 0.4rem;
-  background-color: #3b5fff;
-  color: white;
-  cursor: pointer;
+    padding: 0.4rem 0.9rem;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: #3b5fff;
+    color: white;
+    cursor: pointer;
 }
 .historyDialog form {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
