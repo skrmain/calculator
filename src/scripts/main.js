@@ -1,10 +1,14 @@
 import Calculation from './calculation.js';
+import { addHistory, loadHistory, removeHistory } from './history.js';
 
 let btn = document.querySelectorAll('button');
 let cal = document.querySelector('.calculation');
 let res = document.querySelector('.result');
 let alertDialog = document.querySelector('.alertDialog');
 let alertMessage = document.querySelector('#invalidOperationMessage');
+
+let historyDialog = document.querySelector('.historyDialog');
+let historyList = document.querySelector('.historyList');
 
 let calculation = new Calculation();
 
@@ -50,6 +54,15 @@ function putVal(a) {
                 showAlert('Enter a number before choosing an operator.');
             }
             break;
+        case '=': {
+            const entry = calculation.evaluate();
+            if (entry) {
+                addHistory(entry.expression, entry.result);
+                updateHtml();
+                doOperation();
+            }
+            break;
+        }
         case 'Backspace':
             calculation.backspace();
             doOperation();
@@ -62,6 +75,31 @@ function putVal(a) {
             break;
     }
 }
+
+function renderHistory(history) {
+    historyList.replaceChildren(...history.map((item) => {
+        const li = document.createElement('li');
+        const text = document.createElement('span');
+        text.textContent = `${item.expression} = ${item.result}`;
+        const del = document.createElement('button');
+        del.type = 'button';
+        del.textContent = 'Delete';
+        del.setAttribute('aria-label', `Delete ${text.textContent}`);
+        del.dataset.historyId = String(item.id);
+        li.append(text, del);
+        return li;
+    }));
+}
+
+document.querySelector('.historyBtn').addEventListener('click', () => {
+    renderHistory(loadHistory());
+    historyDialog.showModal();
+});
+
+historyList.addEventListener('click', (e) => {
+    const id = e.target.dataset?.historyId;
+    if (id !== undefined) renderHistory(removeHistory(Number(id)));
+});
 
 function showAlert(message) {
     alertMessage.textContent = message;
@@ -80,13 +118,16 @@ function doOperation() {
 
 const keys = Array.from(document.querySelectorAll('button'));
 window.addEventListener('keydown', (e) => {
-    let value = document.querySelector(`button[data-value="${e.key}"]`);
+    if (historyDialog.open || alertDialog.open) return;
+    const key = e.key === 'Enter' ? '=' : e.key;
+    let value = document.querySelector(`button[data-value="${key}"]`);
     if (!value) return;
+    e.preventDefault();
     value.classList.add('btnStyle');
-    putVal(e.key);
+    putVal(key);
 });
 window.addEventListener('keyup', (e) => {
-    let value = document.querySelector(`button[data-value="${e.key}"]`);
+    let value = document.querySelector(`button[data-value="${e.key === 'Enter' ? '=' : e.key}"]`);
     value?.classList.remove('btnStyle');
 });
 window.addEventListener('blur', () => {

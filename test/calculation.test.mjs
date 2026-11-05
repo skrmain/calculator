@@ -66,3 +66,11 @@ test('limits entered operands to ten decimal places', () => {
     assert.equal(calculation.getExpression(), '1.1234567890');
     assert.equal(calculation.getResult(), '1.123456789');
 });
+
+test('evaluate returns history entry and keeps result as operand', () => {
+    const calculation = new Calculation();
+    '12+30'.split('').forEach((c) => (/\d/.test(c) ? calculation.addDigit(c) : calculation.addOperator(c)));
+    assert.deepEqual(calculation.evaluate(), { expression: '12 + 30', result: '42' });
+    assert.equal(calculation.getExpression(), '42');
+    assert.equal(calculation.evaluate(), null);
+});

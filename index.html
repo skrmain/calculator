@@ -20,7 +20,7 @@
     <body>
         <section class="titleContainer">
             <div>
-                <span class="title">Calculator</span>
+                <button class="historyBtn" aria-label="History">History</button>
                 <button class="checkBtn">Add to Home Screen</button>
                 <span>
                     <a href="https://github.com/skrmain/calculator" target="_blank">
@@ -50,6 +50,7 @@
             <button aria-label="Multiply" class="operationButton" data-value="*">*</button>
             <button aria-label="Zero" class="numButton zero" data-value="0">0</button>
             <button aria-label="Decimal point" class="numButton" data-value=".">.</button>
+            <button aria-label="Equals" class="operationButton" data-value="=">=</button>
             <button aria-label="Divide" class="operationButton" data-value="/">/</button>
         </section>
 
@@ -58,6 +59,15 @@
             <p id="invalidOperationMessage">Enter a number before choosing an operator.</p>
             <form method="dialog">
                 <button autofocus>OK</button>
+            </form>
+        </dialog>
+
+        <dialog class="historyDialog" aria-labelledby="historyTitle">
+            <h2 id="historyTitle">History</h2>
+            <ul class="historyList"></ul>
+            <p class="historyEmpty">No history yet.</p>
+            <form method="dialog">
+                <button autofocus>Close</button>
             </form>
         </dialog>
 
