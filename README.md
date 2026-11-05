@@ -15,6 +15,9 @@ npm install
 # Start the dev server
 npm run dev
 
+# Run tests
+npm run test
+
 # Build for production
 npm run build
 
