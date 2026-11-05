@@ -36,6 +36,6 @@ npm run preview
 ## Tech Stack
 
 - [Vite](https://vite.dev/)
-- [Sass (SCSS)](https://sass-lang.com/)
+- CSS
 - [Netlify](https://www.netlify.com/) (hosting and deploy previews)
 - [PWA Docs](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
