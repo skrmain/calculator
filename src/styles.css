@@ -215,3 +215,59 @@ body {
     display: flex;
     justify-content: flex-end;
 }
+
+@media (prefers-color-scheme: dark) {
+    body,
+    .titleContainer,
+    .calculationContainer {
+        background-color: #121212;
+        color: #f5f5f5;
+    }
+
+    .titleContainer div .historyBtn,
+    .checkBtn {
+        background-color: #303030;
+        color: #f5f5f5;
+    }
+
+    .titleContainer div span .github,
+    .buttonContainer .plusMinus {
+        filter: invert(1);
+    }
+
+    .buttonContainer button {
+        background-color: #303030;
+        color: #f5f5f5;
+    }
+
+    .buttonContainer .numButton {
+        background-color: #424242;
+    }
+
+    .buttonContainer button:active {
+        background-color: #555;
+    }
+
+    .buttonContainer .operationButton:active {
+        background-color: #5977ff;
+    }
+
+    .btnStyle {
+        border-color: #aaa;
+        box-shadow: 0 0 3px #aaa;
+    }
+
+    .checkBtn:hover {
+        background-color: #484848;
+    }
+
+    .alertDialog,
+    .historyDialog {
+        background-color: #242424;
+        color: #f5f5f5;
+    }
+
+    .historyDialog .historyList li {
+        border-bottom-color: #555;
+    }
+}
